@@ -26,3 +26,8 @@ def getCollum(diced, collum):
     for i in range(len(diced[0])-1):
         collumdata.append(diced[i+1][collum])
     return collumdata
+
+def num(collum):
+    for i in range(len(collum)):
+        collum[i] = float(collum[i])
+    return collum
