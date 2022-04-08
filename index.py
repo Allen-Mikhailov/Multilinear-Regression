@@ -39,7 +39,7 @@ itterations = 1000
 weightRange = range(weightCount)
 nRange = range(n)
 
-yCollum = CSV.num(CSV.getCollum(csv, yParam))
+yCollum = CSV.num(CSV.getCollum(csv))
 
 alpha = 1  # Learning Rate
 
