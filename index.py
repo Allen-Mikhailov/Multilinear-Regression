@@ -7,13 +7,15 @@ values = df.values
 t = np.vectorize(ord)
 
 values = t(values)
+values = values.astype(float)
 
-for i in range(1):
+rows, collums = df.shape
+for i in range(collums):
     vals = values[:, i]
     mn = vals.min()
     mx = vals.max()
     vals -= mn
-    values[:, i] = vals / int(mx-mn)
+    values[:, i] = vals / (mx-mn)
 
-print(values[:, 0])
-print(df.values[:, 0])
+    print(values[:, i])
+    print(df.values[:, i])
