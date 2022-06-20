@@ -1,7 +1,53 @@
 import random
+import numpy as np
 
+def regression(learningRate, itterations, yColumn, xColumns):
+    weightCount = len(xColumns)
+    weightRange = range(weightCount)
 
-def regression(learningRate, itterations, yCollum, xCollums):
+    yColumn = np.array(yColumn)
+    xColumns = np.array(xColumns)
+    xColumnsT = xColumns.T
+
+    n = len(yColumn)
+    nRange = range(n)
+
+    b = random.random()
+
+    weights = []
+    for i in weightRange:
+        weights.append(random.random())
+
+    def h(row):
+        return b + np.sum(weights*xColumnsT[row])
+
+    for itt in range(itterations):
+        terr = 0
+
+        # weights
+        for j in weightRange:
+            err = 0
+            for i in nRange:
+                err += (h(i)-yColumn[i])*xColumns[j][i]
+            weights[j] -= learningRate*(err/n)
+            terr += err
+
+        # bias
+        err = 0
+        for i in nRange:
+            err += (h(i)-yColumn[i])
+        b -= learningRate*(err/n)
+        terr += err
+
+        terr /= n*weightCount
+        print("Average Err: ", terr)
+
+    return b, weights
+
+def npregression(learningRate, itterations, yCollum, xCollums):
+    yCollum = np.array(yCollum)
+    xCollums = np.array(xCollums)
+
     weightCount = len(xCollums)
     weightRange = range(weightCount)
 
@@ -13,29 +59,11 @@ def regression(learningRate, itterations, yCollum, xCollums):
     weights = []
     for i in weightRange:
         weights.append(random.random())
+    weights = np.array(weights)
 
-    def h(row):
-        v = b
-        for j in weightRange:
-            v += weights[j] * xCollums[j][row]
+    def h():
+        return 
 
-        return v
-
-    for itt in range(itterations):
-        # weights
-        for j in weightRange:
-            err = 0
-            for i in nRange:
-                err += (h(i)-yCollum[i])*xCollums[j][i]
-            weights[j] -= learningRate*(err/n)
-
-        # bias
-        err = 0
-        for i in nRange:
-            err += (h(i)-yCollum[i])
-        b -= learningRate*(err/n)
-
-    return b, weights
 
 def predict(bias, weights, values):
     val = bias

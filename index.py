@@ -17,7 +17,7 @@ rows, columns = df.shape
 for i in range(columns):
     values[:, i] = pd.factorize(values[:, i])[:][0]
 
-rangesample = 8000
+rangesample = 100
 
 xColumn = values[:rangesample, 1:].T
 yColumn = values[:rangesample, 0]
@@ -37,7 +37,7 @@ yColumn = values[:rangesample, 0]
     
 
 
-b, weights = reg.regression(.005, 100, yColumn, xColumn)
+b, weights = reg.regression(.005, 1000, yColumn, xColumn)
 
 plt.figure()
 
@@ -51,11 +51,11 @@ plt.figure()
 def clamp(val, minv, maxv):
     return min(max(minv, val), maxv)
 
-calculatedvals = []
+calculatedvals = [0]
 actualvals = []
 for i in range(100):
     actualvals.append(yColumn[i])
-    calculatedvals.append(round(reg.predict(b, weights, xColumn[:, i])))
+    calculatedvals.append(round(clamp(reg.predict(b, weights, xColumn[:, i]), 0, 1))+.1)
 plt.plot(calculatedvals)
 plt.plot(actualvals)
 plt.show()
