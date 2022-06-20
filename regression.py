@@ -51,27 +51,6 @@ def regression(learningRate, itterations, yColumn, xColumns):
 
     return b, weights
 
-def npregression(learningRate, itterations, yCollum, xCollums):
-    yCollum = np.array(yCollum)
-    xCollums = np.array(xCollums)
-
-    weightCount = len(xCollums)
-    weightRange = range(weightCount)
-
-    n = len(yCollum)
-    nRange = range(n)
-
-    b = random.random()
-
-    weights = []
-    for i in weightRange:
-        weights.append(random.random())
-    weights = np.array(weights)
-
-    def h():
-        return 
-
-
 def predict(bias, weights, values):
     val = bias
     for i in range(len(values)):
