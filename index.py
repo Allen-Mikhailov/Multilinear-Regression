@@ -25,9 +25,9 @@ print(b, weights)
 
 plt.figure()
 
-for i in range(len(weights)):
-    x1 = [0, b]
-    x2 = 1
-    y2 = weights[i]
-    plt.plot([0, 1], [b, weights[i]], marker="o")
+# for i in range(len(weights)):
+#     x1 = [0, b]
+#     x2 = 1
+#     y2 = weights[i]
+#     plt.plot([0, 1], [b, weights[i]], marker="o")
 plt.show()
