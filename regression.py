@@ -21,26 +21,33 @@ def regression(learningRate, itterations, yColumn, xColumns):
     def h(row):
         return b + np.sum(weights*xColumnsT[row])
 
-    for itt in range(itterations):
+    lerror = 1
+    itt = 0
+    while lerror > .003:
         terr = 0
+        itt += 1
+
+        htable = []
+        for i in nRange:
+            htable.append(h(i))
+        htable = np.array(htable)
 
         # weights
         for j in weightRange:
-            err = 0
-            for i in nRange:
-                err += (h(i)-yColumn[i])*xColumns[j][i]
+            err = np.sum((htable-yColumn)*xColumns[j])
+            # for i in nRange:
+            #     err += (htable[i]-yColumn[i])*xColumns[j][i]
             weights[j] -= learningRate*(err/n)
             terr += err
 
         # bias
-        err = 0
-        for i in nRange:
-            err += (h(i)-yColumn[i])
+        err = np.sum(htable-yColumn)
         b -= learningRate*(err/n)
         terr += err
 
         terr /= n*weightCount
-        print("Average Err: ", terr)
+        lerror = terr
+        print("Average Err: ", terr, "Itteration: ", itt)
 
     return b, weights
 
