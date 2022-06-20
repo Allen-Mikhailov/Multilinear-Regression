@@ -52,7 +52,4 @@ def regression(learningRate, itterations, yColumn, xColumns):
     return b, weights
 
 def predict(bias, weights, values):
-    val = bias
-    for i in range(len(values)):
-        val += values[i]*weights[i]
-    return val
+    return bias + np.sum(np.array(weights) * np.array(values))
