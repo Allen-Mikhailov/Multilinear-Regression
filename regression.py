@@ -35,4 +35,10 @@ def regression(learningRate, itterations, yCollum, xCollums):
             err += (h(i)-yCollum[i])
         b -= learningRate*(err/n)
 
-        return b, weights
+    return b, weights
+
+def predict(bias, weights, values):
+    val = bias
+    for i in range(len(values)):
+        val += values[i]*weights[i]
+    return val
